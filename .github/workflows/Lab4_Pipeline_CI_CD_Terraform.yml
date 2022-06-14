@@ -36,13 +36,13 @@ jobs:
       - name: Terraform Plan
         run: |
           cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform
-          terraform plan -var 'AzureSubscriptionID=${{ secrets.SUBSCRIPTIONID }}' -var 'AzureClientSecret=${{ secrets.CLIENTSECRET }}' -var 'AzureClientID=${{ secrets.CLIENTID }}' -var 'AzureTenandID=${{ secrets.TENANTID }}' -lock=false -out=monplan.tfplan
+          terraform plan -var 'AzureSubscriptionID=${{ secrets.SUBSCRIPTIONID }}' -var 'AzureClientSecret=${{ secrets.CLIENTSECRET }}' -var 'AzureClientID=${{ secrets.CLIENTID }}' -var 'AzureTenandID=${{ secrets.TENANTID }}' -lock=false -out=tf.plan
      
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: artifactTerraform
-          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/monplan.tfplan
+          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/tf.plan
 
   Terraform-Apply:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: artifactTerraform
-          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/monplan.tfplan
+          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/tf.plan
       - name: Check files
         run: |
           cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform
@@ -78,6 +78,6 @@ jobs:
       - name: Terraform Apply
         run: |
           cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform
-          terraform apply -auto-approve -lock=false "monplan.tfplan"
+          terraform apply -auto-approve -lock=false "tf.plan"
     
 
