@@ -53,16 +53,7 @@ jobs:
       - name: Checks-out du repository
         uses: actions/checkout@v2
 
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: artifactTerraform
-          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform/tf.plan
-      - name: Check files
-        run: |
-          cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform
-          ls -lisa 
-
+      
       # Install the needed version of Terraform cli
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -74,7 +65,18 @@ jobs:
         run: |
           cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform          
           terraform init -backend-config="sas_token=${{ secrets.BACKENDSTORAGESASTOKEN }}"    
-      ## apply a execution plan https://www.terraform.io/cli/commands/apply      
+      ## apply a execution plan https://www.terraform.io/cli/commands/apply  
+      
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: artifactTerraform
+          path: ./Terraform/Lab4_Pipeline_CI_CD_Terraform
+      - name: Check files
+        run: |
+          cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform
+          ls -lisa 
+
       - name: Terraform Apply
         run: |
           cd ./Terraform/Lab4_Pipeline_CI_CD_Terraform
