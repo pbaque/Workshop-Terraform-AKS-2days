@@ -1,7 +1,7 @@
 #  Resource Group Name
 variable "resourceGroupName" {
   type    = string
-  default = "RG-VM"
+  default = "RG-VM-PBE"
 }
 
 variable "azureRegion" {
@@ -14,23 +14,23 @@ variable "azureRegion" {
 
 variable "vnetName" {
     type = string
-    default = "Vnet-VM"  
+    default = "Vnet-VM-PBE"  
 }
 
 variable "subnetName" {
     type = string
-    default = "Subnet-VM"  
+    default = "Subnet-VM-PBE"  
 }
 
 variable "nicName" {
     type = string
-    default = "Nic-1"
+    default = "Nic-PBE-1"
   
 }
 
 variable "vmName" {
     type = string
-    default = "VM-Linux"  
+    default = "VM-Linux-PBE"  
 }
 
 # az vm list-skus -l westus
@@ -44,3 +44,12 @@ variable "vmUser" {
     default = "adminuser"  
 }
 
+variable "pip_name" {
+  type = string
+  default = "pip-pbe-1"
+}
+
+variable "nsg_name" {
+    type = string
+    default = "nsg-pbe"
+}

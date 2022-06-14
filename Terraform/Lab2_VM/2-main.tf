@@ -26,6 +26,7 @@ resource "azurerm_network_interface" "terra_nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.terra_subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pip.id
   }
 }
 
@@ -56,4 +57,12 @@ resource "azurerm_linux_virtual_machine" "terra_vm" {
     version   = "latest"
   }
 }
+
+resource "azurerm_public_ip" "pip" {
+  name                = var.pip_name
+  resource_group_name = azurerm_resource_group.terra_rg.name
+  location            = azurerm_resource_group.terra_rg.location
+  allocation_method   = "Static"
+}
+
 
