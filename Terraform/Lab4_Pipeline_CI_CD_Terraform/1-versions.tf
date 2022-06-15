@@ -8,7 +8,7 @@
 #                                                                                                   |_|                                         
 
 terraform {
-  required_version = ">= 1.1.7"
+  required_version = ">= 1.2.2"
   # cf. https://www.terraform.io/language/settings/backends/azurerm
   backend "azurerm" {
     resource_group_name  = "RG-AKSClusterPBE"         # mettre ici le nom du resource group de vos ressource
